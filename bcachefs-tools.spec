@@ -40,6 +40,7 @@ This package contains userspace tools to manage bcachefs.
 
 %build
 export RUSTFLAGS="%{rpmrustflags}"
+export PKG_CONFIG_ALLOW_CROSS=1
 %{__make} \
 	V=1 \
 	PREFIX="%{_prefix}" \
