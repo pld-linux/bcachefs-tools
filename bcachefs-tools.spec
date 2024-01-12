@@ -1,7 +1,7 @@
 Summary:	Userspace tools for bcachefs
 Name:		bcachefs-tools
 Version:	1.4.0
-Release:	1
+Release:	0.1
 License:	GPL v2+
 Group:		Applications/System
 Source0:	https://evilpiepirate.org/bcachefs-tools/%{name}-vendored-%{version}.tar.zst
