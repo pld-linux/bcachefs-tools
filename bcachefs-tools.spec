@@ -9,11 +9,13 @@ Source0:	https://evilpiepirate.org/bcachefs-tools/%{name}-vendored-%{version}.ta
 Patch0:		rust-target.patch
 URL:		https://bcachefs.org/
 BuildRequires:	cargo
+BuildRequires:	clang-devel
 BuildRequires:	keyutils-devel
 BuildRequires:	libaio-devel
 BuildRequires:	libblkid-devel
 BuildRequires:	libsodium-devel
 BuildRequires:	libuuid-devel
+BuildRequires:	llvm-devel
 BuildRequires:	lz4-devel
 BuildRequires:	pkgconfig
 BuildRequires:	systemd-devel
