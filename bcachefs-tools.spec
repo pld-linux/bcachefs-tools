@@ -29,6 +29,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sbindir	/sbin
 
+%define		filterout_c	-fvar-tracking-assignments
+
 %description
 Bcachefs is an advanced new filesystem for Linux, with an emphasis on
 reliability and robustness and the complete set of features one would
