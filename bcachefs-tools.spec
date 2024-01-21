@@ -46,6 +46,7 @@ This package contains userspace tools to manage bcachefs.
 export RUSTFLAGS="%{rpmrustflags}"
 export PKG_CONFIG_ALLOW_CROSS=1
 export BINDGEN_EXTRA_CLANG_ARGS="%{rpmcflags} %{rpmcppflags}"
+export LIBCLANG_PATH="%{_libdir}"
 %{__make} \
 	V=1 \
 	PREFIX="%{_prefix}" \
