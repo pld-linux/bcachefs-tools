@@ -9,7 +9,11 @@ Source0:	https://evilpiepirate.org/bcachefs-tools/%{name}-vendored-%{version}.ta
 Patch0:		rust-target.patch
 URL:		https://bcachefs.org/
 BuildRequires:	cargo
+%ifnarch x32
 BuildRequires:	clang-devel
+%else
+BuildRequires:	clang-devel(x86-64)
+%endif
 BuildRequires:	keyutils-devel
 BuildRequires:	libaio-devel
 BuildRequires:	libblkid-devel
@@ -46,7 +50,11 @@ This package contains userspace tools to manage bcachefs.
 export RUSTFLAGS="%{rpmrustflags}"
 export PKG_CONFIG_ALLOW_CROSS=1
 export BINDGEN_EXTRA_CLANG_ARGS="%{rpmcflags} %{rpmcppflags}"
+%ifnarch x32
 export LIBCLANG_PATH="%{_libdir}"
+%else
+export LIBCLANG_PATH=/usr/lib64
+%endif
 %{__make} \
 	V=1 \
 	PREFIX="%{_prefix}" \
