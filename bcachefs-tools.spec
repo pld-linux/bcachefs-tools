@@ -1,11 +1,11 @@
 Summary:	Userspace tools for bcachefs
 Name:		bcachefs-tools
-Version:	1.4.0
+Version:	1.4.1
 Release:	0.1
 License:	GPL v2+
 Group:		Applications/System
 Source0:	https://evilpiepirate.org/bcachefs-tools/%{name}-vendored-%{version}.tar.zst
-# Source0-md5:	60eb028451b12bb9bfe0d129fb580aea
+# Source0-md5:	2cbe55823812642656b2496f22bcf175
 Patch0:		rust-target.patch
 URL:		https://bcachefs.org/
 BuildRequires:	cargo
@@ -47,6 +47,7 @@ export PKG_CONFIG_ALLOW_CROSS=1
 	V=1 \
 	PREFIX="%{_prefix}" \
 	ROOT_SBINDIR="%{_sbindir}" \
+	LIBEXECDIR="%{_libexecdir}" \
 	CC="%{__cc}" \
 	EXTRA_CFLAGS="%{rpmcflags}" \
 	EXTRA_LDFLAGS="%{rpmldflags}" \
@@ -62,6 +63,7 @@ install -d $RPM_BUILD_ROOT{%{_sbindir},%{_mandir}/man8}
 	V=1 \
 	PREFIX="%{_prefix}" \
 	ROOT_SBINDIR="%{_sbindir}" \
+	LIBEXECDIR="%{_libexecdir}" \
 	CARGO="%__cargo" \
 	CARGO_BUILD_ARGS="-v --release --target %rust_target" \
 	CARGO_TARGET="%rust_target"
@@ -76,8 +78,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_sbindir}/fsck.bcachefs
 %attr(755,root,root) %{_sbindir}/mkfs.bcachefs
 %attr(755,root,root) %{_sbindir}/mount.bcachefs
-%attr(755,root,root) %{_prefix}/lib/bcachefsck_all
-%attr(755,root,root) %{_prefix}/lib/bcachefsck_fail
+%attr(755,root,root) %{_libexecdir}/bcachefsck_all
+%attr(755,root,root) %{_libexecdir}/bcachefsck_fail
 %{systemdunitdir}/bcachefsck@.service
 %{systemdunitdir}/bcachefsck_all.service
 %{systemdunitdir}/bcachefsck_all.timer
