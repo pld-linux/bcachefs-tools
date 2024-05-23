@@ -1,4 +1,5 @@
 Summary:	Userspace tools for bcachefs
+Summary(pl.UTF-8):	Narzędzia przestrzeni użytkownika do bcachefs
 Name:		bcachefs-tools
 Version:	1.4.1
 Release:	0.1
@@ -17,6 +18,7 @@ BuildRequires:	clang-devel(x86-64)
 BuildRequires:	keyutils-devel
 BuildRequires:	libaio-devel
 BuildRequires:	libblkid-devel
+BuildRequires:	libfuse3-devel >= 3.7
 BuildRequires:	libsodium-devel
 BuildRequires:	libuuid-devel
 BuildRequires:	llvm-devel
@@ -41,6 +43,13 @@ reliability and robustness and the complete set of features one would
 expect from a modern filesystem.
 
 This package contains userspace tools to manage bcachefs.
+
+%description -l pl.UTF-8
+Bcachefs to nowy zaawansowany system plików dla Linuksa, kładący
+nacisk na wiarygodności, solidności i kompletnym zestawie funkcji,
+których można oczekiwać od nowoczesnego systemu plików.
+
+Ten pakiet zawiera narzędzia przestrzeni użytkownika do bcachefs.
 
 %prep
 %setup -q
@@ -70,6 +79,7 @@ export LIBCLANG_PATH=/usr/lib64
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_sbindir},%{_mandir}/man8}
+
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	V=1 \
@@ -88,8 +98,11 @@ rm -rf $RPM_BUILD_ROOT
 %doc README.md
 %attr(755,root,root) %{_sbindir}/bcachefs
 %attr(755,root,root) %{_sbindir}/fsck.bcachefs
+%attr(755,root,root) %{_sbindir}/fsck.fuse.bcachefs
 %attr(755,root,root) %{_sbindir}/mkfs.bcachefs
+%attr(755,root,root) %{_sbindir}/mkfs.fuse.bcachefs
 %attr(755,root,root) %{_sbindir}/mount.bcachefs
+%attr(755,root,root) %{_sbindir}/mount.fuse.bcachefs
 %attr(755,root,root) %{_libexecdir}/bcachefsck_all
 %attr(755,root,root) %{_libexecdir}/bcachefsck_fail
 %{systemdunitdir}/bcachefsck@.service
@@ -100,3 +113,7 @@ rm -rf $RPM_BUILD_ROOT
 %{systemdunitdir}/system-bcachefsck.slice
 /lib/udev/rules.d/64-bcachefs.rules
 %{_mandir}/man8/bcachefs.8*
+
+# initramfs subpackage?
+#%{_datadir}/initramfs-tools/hooks/bcachefs
+#%{_datadir}/initramfs-tools/scripts/local-premount/bcachefs
