@@ -10,6 +10,7 @@ Source0:	https://evilpiepirate.org/bcachefs-tools/%{name}-vendored-%{version}.ta
 Patch0:		rust-target.patch
 URL:		https://bcachefs.org/
 BuildRequires:	cargo
+BuildRequires:	clang
 %ifnarch x32
 BuildRequires:	clang-devel
 %else
