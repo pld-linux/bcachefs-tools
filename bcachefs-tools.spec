@@ -2,7 +2,7 @@ Summary:	Userspace tools for bcachefs
 Summary(pl.UTF-8):	Narzędzia przestrzeni użytkownika do bcachefs
 Name:		bcachefs-tools
 Version:	1.7.0
-Release:	0.1
+Release:	1
 License:	GPL v2+
 Group:		Applications/System
 Source0:	https://evilpiepirate.org/bcachefs-tools/%{name}-vendored-%{version}.tar.zst
