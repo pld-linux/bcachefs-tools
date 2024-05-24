@@ -83,6 +83,7 @@ install -d $RPM_BUILD_ROOT{%{_sbindir},%{_mandir}/man8}
 
 # keep build env settings to avoid rebuilds ("dirty")
 export RUSTFLAGS="%{rpmrustflags}"
+export PKG_CONFIG_ALLOW_CROSS=1
 export BINDGEN_EXTRA_CLANG_ARGS="%{rpmcflags} %{rpmcppflags}"
 %ifnarch x32
 export LIBCLANG_PATH="%{_libdir}"
