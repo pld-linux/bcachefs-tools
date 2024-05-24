@@ -1,7 +1,7 @@
---- bcachefs-tools-1.4.0/Makefile.orig	2023-12-24 01:39:01.000000000 +0100
-+++ bcachefs-tools-1.4.0/Makefile	2024-01-12 18:28:15.566397728 +0100
-@@ -58,6 +58,13 @@
- CARGO_MANIFEST=--manifest-path rust-src/Cargo.toml
+--- bcachefs-tools-1.7.0/Makefile.orig	2024-05-23 22:32:41.238838991 +0200
++++ bcachefs-tools-1.7.0/Makefile	2024-05-24 16:34:59.100373730 +0200
+@@ -59,6 +59,13 @@ CARGO_PROFILE=release
+ # CARGO_PROFILE=debug
  
  CARGO_BUILD_ARGS=--$(CARGO_PROFILE)
 +
@@ -11,24 +11,15 @@
 +else
 +	CARGO_TARGET_DIR := target
 +endif
- CARGO_BUILD=$(CARGO) build $(CARGO_BUILD_ARGS) $(CARGO_MANIFEST)
+ CARGO_BUILD=$(CARGO) build $(CARGO_BUILD_ARGS)
  
- CARGO_CLEAN=$(CARGO) clean $(CARGO_CLEAN_ARGS) $(CARGO_MANIFEST)
-@@ -174,7 +181,7 @@
- BCACHEFS_DEPS=libbcachefs.a
- 
- ifndef NO_RUST
--	BCACHEFS_DEPS+=rust-src/target/release/libbcachefs_rust.a
-+	BCACHEFS_DEPS+=rust-src/$(CARGO_TARGET_DIR)/release/libbcachefs_rust.a
- else
- 	CFLAGS+=-DBCACHEFS_NO_RUST
- endif
-@@ -188,7 +195,7 @@
- 	$(Q)ar -rc $@ $+
- 
- RUST_SRCS:=$(shell find rust-src/src rust-src/bch_bindgen/src -type f -iname '*.rs')
--rust-src/target/release/libbcachefs_rust.a: $(RUST_SRCS)
-+rust-src/$(CARGO_TARGET_DIR)/release/libbcachefs_rust.a: $(RUST_SRCS)
- 	$(CARGO_BUILD)
- 
- tests/test_helper: $(filter ./tests/%.o, $(OBJS))
+ CARGO_CLEAN=$(CARGO) clean $(CARGO_CLEAN_ARGS)
+@@ -201,7 +208,7 @@ cmd_version.o : .version
+ install: INITRAMFS_HOOK=$(INITRAMFS_DIR)/hooks/bcachefs
+ install: INITRAMFS_SCRIPT=$(INITRAMFS_DIR)/scripts/local-premount/bcachefs
+ install: bcachefs $(optional_install)
+-	$(INSTALL) -m0755 -D target/release/bcachefs -t $(DESTDIR)$(ROOT_SBINDIR)
++	$(INSTALL) -m0755 -D $(CARGO_TARGET_DIR)/release/bcachefs -t $(DESTDIR)$(ROOT_SBINDIR)
+ 	$(INSTALL) -m0644 -D bcachefs.8    -t $(DESTDIR)$(PREFIX)/share/man/man8/
+ 	$(INSTALL) -m0755 -D initramfs/script $(DESTDIR)$(INITRAMFS_SCRIPT)
+ 	$(INSTALL) -m0755 -D initramfs/hook   $(DESTDIR)$(INITRAMFS_HOOK)
