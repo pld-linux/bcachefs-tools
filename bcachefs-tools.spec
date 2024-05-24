@@ -81,6 +81,15 @@ export LIBCLANG_PATH=/usr/lib64
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_sbindir},%{_mandir}/man8}
 
+# keep build env settings to avoid rebuilds ("dirty")
+export RUSTFLAGS="%{rpmrustflags}"
+export BINDGEN_EXTRA_CLANG_ARGS="%{rpmcflags} %{rpmcppflags}"
+%ifnarch x32
+export LIBCLANG_PATH="%{_libdir}"
+%else
+export LIBCLANG_PATH=/usr/lib64
+%endif
+
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	V=1 \
