@@ -1,12 +1,12 @@
 Summary:	Userspace tools for bcachefs
 Summary(pl.UTF-8):	Narzędzia przestrzeni użytkownika do bcachefs
 Name:		bcachefs-tools
-Version:	1.9.4
+Version:	1.13.0
 Release:	1
 License:	GPL v2+
 Group:		Applications/System
 Source0:	https://evilpiepirate.org/bcachefs-tools/%{name}-vendored-%{version}.tar.zst
-# Source0-md5:	b57b3ff52fdc5b4f6d259f801bc3bdfe
+# Source0-md5:	5ee95803cdd9b2a591b38537d13b027c
 Patch0:		rust-target.patch
 URL:		https://bcachefs.org/
 BuildRequires:	cargo
@@ -25,7 +25,7 @@ BuildRequires:	libuuid-devel
 BuildRequires:	llvm-devel
 BuildRequires:	lz4-devel
 BuildRequires:	pkgconfig
-BuildRequires:	rust >= 1.70
+BuildRequires:	rust >= 1.77
 BuildRequires:	systemd-devel
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	udev-devel
